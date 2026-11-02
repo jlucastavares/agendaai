@@ -1,9 +1,18 @@
-// Login do dono do negócio (Supabase Auth)
-export default function LoginPage() {
+import { LoginForm } from "./login-form";
+
+// Login e cadastro do dono do negócio (Supabase Auth)
+export default async function LoginPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ error?: string }>;
+}) {
+  const { error } = await searchParams;
+  const initialError =
+    error === "link-invalido" ? "Link de confirmação inválido ou expirado." : undefined;
+
   return (
-    <main className="mx-auto max-w-sm p-8">
-      <h1 className="text-2xl font-bold">Entrar</h1>
-      <p className="mt-2 text-zinc-600">Em breve: login com e-mail/Google.</p>
+    <main className="flex min-h-screen items-center justify-center p-4">
+      <LoginForm initialError={initialError} />
     </main>
   );
 }
